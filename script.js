@@ -134,7 +134,10 @@ document.getElementById('scrollHint').addEventListener('click', function() {
 var cur = document.getElementById('cursor');
 var ring = document.getElementById('cursor-ring');
 if (!IS_TOUCH) {
-  var mx = 0, my = 0, rx = 0, ry = 0;
+  var mx = window.innerWidth / 2,
+    my = window.innerHeight / 2,
+    rx = mx,
+    ry = my;
   document.addEventListener('mousemove', function(e) { mx = e.clientX; my = e.clientY; });
   (function loop() {
     rx += (mx - rx) * 0.09; ry += (my - ry) * 0.09;

@@ -140,7 +140,7 @@ function renderProjects(sk) {
     var vmBtn = document.createElement('button');
     vmBtn.className = 'imm-view-btn';
     vmBtn.style.cssText = 'font-size:.85rem;padding:12px 28px;';
-    vmBtn.innerHTML = 'View ' + extraList.length + ' More Projects <svg width="14" height="12" viewBox="0 0 14 12" fill="none"><path d="M7 1v10M2 7l5 5 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    vmBtn.innerHTML = 'View More Projects <svg width="14" height="12" viewBox="0 0 14 12" fill="none"><path d="M7 1v10M2 7l5 5 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
     vmBtn.addEventListener('click', function() {
       extraCards.forEach(function(card) { card.style.display = ''; setTimeout(function() { card.classList.add('visible'); }, 30); });
       vmWrap.style.display = 'none';

@@ -191,19 +191,17 @@ body {
   padding:80px 8vw 0;
   display:flex; align-items:center; gap:20px;
   position:relative; z-index:1;
-  text-align: center;
 }
 .sector-divider-line { flex:1; height:1px; background:rgba(0,0,0,.1); }
 .sector-divider-label {
   font-family:'Quicksand',sans-serif; font-weight:700;
   font-size:.7rem; letter-spacing:3px; text-transform:uppercase; color:var(--mid);
-  flex-shrink: 0;
+  flex-shrink:0;
 }
 .sector-divider-num {
   font-family:'Quicksand',sans-serif; font-weight:700;
   font-size:.7rem; letter-spacing:2px; color:var(--mid); opacity:.5;
-  flex-shrink: 0;
-  min-width: 28px;
+  position:absolute; left:8vw;
 }
 
 /* PROJECT GRID */

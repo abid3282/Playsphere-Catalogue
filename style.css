@@ -189,26 +189,25 @@ body {
 }
 .sector-divider {
   padding:80px 8vw 0;
-  display:flex; align-items:center; gap:20px;
+  display:flex; align-items:center;
   position:relative; z-index:1;
 }
 .sector-divider-line { flex:1; height:1px; background:rgba(0,0,0,.1); }
 .sector-divider-label {
   font-family:'Quicksand',sans-serif; font-weight:700;
   font-size:.7rem; letter-spacing:3px; text-transform:uppercase; color:var(--mid);
-  flex-shrink:0;
+  position:absolute; left:50%; transform:translateX(-50%);
+  white-space:nowrap;
+  background:var(--offwhite);
+  padding:0 16px;
 }
 .sector-divider-num {
   font-family:'Quicksand',sans-serif; font-weight:700;
   font-size:.7rem; letter-spacing:2px; color:var(--mid); opacity:.5;
-  flex-shrink:0;
-  width:28px;
+  position:absolute;
+  left:8vw;
 }
-.sector-divider::after {
-  content:'';
-  width:28px;
-  flex-shrink:0;
-}
+.sector-divider::after { content:''; }
 
 /* PROJECT GRID */
 .project-grid {
@@ -1034,6 +1033,9 @@ footer {
   /* ── SECTOR DIVIDER ── */
   .sector-divider {
     padding: 36px 4vw 0;
+  }
+  .sector-divider-num {
+    left: 4vw;
   }
   .sector-divider-label {
     font-size: .62rem;

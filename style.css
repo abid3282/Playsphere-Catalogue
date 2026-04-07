@@ -201,7 +201,13 @@ body {
 .sector-divider-num {
   font-family:'Quicksand',sans-serif; font-weight:700;
   font-size:.7rem; letter-spacing:2px; color:var(--mid); opacity:.5;
-  position:absolute; left:8vw;
+  flex-shrink:0;
+  width:28px;
+}
+.sector-divider::after {
+  content:'';
+  width:28px;
+  flex-shrink:0;
 }
 
 /* PROJECT GRID */

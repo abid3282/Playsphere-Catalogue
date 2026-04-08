@@ -25,7 +25,7 @@ var B = 'https://static.wixstatic.com/media/';
 
 var PROJECTS = {
   res: [
-    { name:'Meadow Dance by Total Environment', thumb:B+'3e7de2_f3114be8e6f34dbca3c603b95fefccfd~mv2.png', concept:[B+'3e7de2_ee81a3897607491da15a4899d3631a11~mv2.jpeg'], build:[B+'3e7de2_48859aaf954740809b365f9d87a50e16~mv2.png',B+'3e7de2_f281e0f308ea493ca10a42803cd0c622~mv2.jpeg',B+'3e7de2_86ec34b89ab54d4e9403035940236783~mv2.jpeg',B+'3e7de2_d6ef9a66d1244bb68a0a2a92303b55f2~mv2.jpeg',B+'3e7de2_e07e98fe55cc42da9e4620c869fd8f20~mv2.jpeg',B+'3e7de2_1121a777ebed42fd9ba35014d3ca3180~mv2.jpeg'] },
+    { name:'Meadow Dance by Total Environment', thumb:B+'3e7de2_f3114be8e6f34dbca3c603b95fefccfd~mv2.png', concept:[B+'3e7de2_ee81a3897607491da15a4899d3631a11~mv2.jpeg'], build:[B+'3e7de2_8b46cc32ab7f462c975ce3620c34ca8a~mv2.jpeg',B+'3e7de2_bc554247144745a88bc8d63a0fd57522~mv2.jpeg',B+'3e7de2_c2e7e8be0eda4000a47755ee77c83343~mv2.jpeg',B+'3e7de2_cffaf3a9f01a4d9ca6f19a0267d88385~mv2.jpeg',B+'3e7de2_d6ef9a66d1244bb68a0a2a92303b55f2~mv2.jpeg',B+'3e7de2_e07e98fe55cc42da9e4620c869fd8f20~mv2.jpeg',B+'3e7de2_056d79d7ee9f4c85b42b2a5174f5f81e~mv2.jpeg',B+'3e7de2_c5ded487d4e54610b28465e0fa07efcf~mv2.jpeg'], nocrop:true },
     { name:'Purvankara Tivoli', thumb:B+'3e7de2_cfd89d883f4c4762b50fb9200f3d5f08~mv2.png', concept:[B+'3e7de2_33a990a0711c403fa792b79049a451f6~mv2.jpeg'], build:[B+'3e7de2_516bfed6d8c34782b353dce9f0e79346~mv2.jpg',B+'3e7de2_4ce2179267824dfab4fc5d958e3ef161~mv2.jpg',B+'3e7de2_98eb28dbcf8b410d9e32449b392d76e0~mv2.jpg',B+'3e7de2_f9681003c9c542b1863a652ed84614d2~mv2.jpg',B+'3e7de2_78a6a083f9654b31b4c2e9c6fdfef777~mv2.jpg',B+'3e7de2_585f9b9e8c17480798eda063d557d348~mv2.jpg',B+'3e7de2_81c5ba7afbf64518b4f278374dbf61e0~mv2.jpg',B+'3e7de2_a743d43842d04033a049c6e9b58b951f~mv2.jpg',B+'3e7de2_bdc8297b02c74d9188f028fdb787224d~mv2.jpg',B+'3e7de2_dabe9d3a449f49cb83e3453de8d21210~mv2.jpg'] },
     { name:'Purva Zenium', thumb:B+'3e7de2_65bb3fce7dcc4a64ac0110798e771781~mv2.png', concept:[B+'3e7de2_4192fe76371648d19dba33ffcf4361a7~mv2.jpg'], build:[B+'3e7de2_5d036e91044d4ed9b1c6975dd1517c23~mv2.jpg',B+'3e7de2_aedaff340c8545d6881e868e5887894a~mv2.jpg',B+'3e7de2_44cbd96a6cfa44ce989cad29b2a80453~mv2.jpg',B+'3e7de2_6de161556f00472fb457e6eba6111575~mv2.jpg',B+'3e7de2_4d4e998800a0451086d3904e6abd31f5~mv2.jpg',B+'3e7de2_47057b0a991b47f1b96eaa6c1ffca85b~mv2.jpg',B+'3e7de2_1dd0d32976c94f3f81ab7b1481b74752~mv2.jpg'] },
     { name:'Purva Raagam by Purvankara', thumb:B+'3e7de2_51c58abc0b984efeab42696a3741893e~mv2.png', concept:[B+'3e7de2_47950286cfd841acb88a4d6d488968a8~mv2.png'], build:[B+'3e7de2_a42f683c36e848eb9e517fda9da13a62~mv2.jpeg',B+'3e7de2_ccdf455aa6044c6091e6394b73149df3~mv2.jpeg',B+'3e7de2_4a8c0b1d1ac247e1a8a0d8af34b92478~mv2.jpeg',B+'3e7de2_6984c4254b784984af65594f33ce980b~mv2.jpg',B+'3e7de2_282bb9a6d8be41e3a30e7de35a23c2a5~mv2.jpeg',B+'3e7de2_680e3a8643204cf1958489f5e2b8ae80~mv2.jpeg'] },
@@ -419,7 +419,7 @@ window.addEventListener('scroll', function() {
 
 
 // LIGHTBOX
-var lbImgs = [], lbCur = 0, lbConceptCount = 0;
+var lbImgs = [], lbCur = 0, lbConceptCount = 0, lbNoCrop = false;
 
 // WELCOME POPUP
 (function() {
@@ -442,7 +442,7 @@ var lbImgs = [], lbCur = 0, lbConceptCount = 0;
 function openLB(sk, idx) {
   var p = PROJECTS[sk][idx];
   var m = META[sk];
-  lbImgs = []; lbConceptCount = 0;
+  lbImgs = []; lbConceptCount = 0; lbNoCrop = !!p.nocrop;
   if (p.concept && p.concept.length) { for (var c = 0; c < p.concept.length; c++) lbImgs.push(p.concept[c]); lbConceptCount = p.concept.length; }
   if (p.build && p.build.length)     { for (var b = 0; b < p.build.length; b++)   lbImgs.push(p.build[b]); }
   document.getElementById('lbTitle').textContent = p.name;
@@ -520,6 +520,7 @@ function showImg(i) {
   if (existing) { existing.remove(); img.parentNode.style.aspectRatio = '16/9'; }
   img.style.display = '';
   img.style.opacity = '0';
+  img.classList.toggle('lb-nocrop', lbNoCrop);
   img.src = lbImgs[lbCur] || '';
   img.onload  = function() { img.style.opacity = '1'; };
   img.onerror = function() { img.style.opacity = '0.15'; };

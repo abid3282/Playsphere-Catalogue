@@ -442,6 +442,7 @@ footer {
   background:#dce8f2; overflow:hidden; flex-shrink:0;
 }
 .lb-main-img { width:100%; height:100%; object-fit:cover; transition:opacity .3s ease; }
+.lb-main-img.lb-nocrop { object-fit:contain; background:#111; }
 .lb-nav-btn {
   position:absolute; top:50%; transform:translateY(-50%);
   width:48px; height:48px; border-radius:50%;

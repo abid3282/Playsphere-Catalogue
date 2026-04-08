@@ -489,6 +489,8 @@ function openLB(sk, idx) {
 
 function showLBVideo(url) {
   var img = document.getElementById('lbMainImg');
+  var bgBlur = document.querySelector('.lb-bg-blur');
+  if (bgBlur) bgBlur.style.display = 'none';
   img.style.display = 'none';
   document.getElementById('lbPrev').style.display = 'none';
   document.getElementById('lbNext').style.display = 'none';
@@ -510,6 +512,8 @@ function showLBVideo(url) {
 function hideLBVideo() {
   var vid = document.getElementById('lb-video-player');
   if (vid) { vid.pause(); vid.remove(); }
+  var bgBlur = document.querySelector('.lb-bg-blur');
+  if (bgBlur) bgBlur.style.display = '';
   document.getElementById('lbMainImg').style.display = '';
 }
 
@@ -518,6 +522,17 @@ function showImg(i) {
   var img = document.getElementById('lbMainImg');
   var existing = document.getElementById('lb-collage-grid');
   if (existing) { existing.remove(); img.parentNode.style.aspectRatio = '16/9'; }
+
+  // Blurred background
+  var bgBlur = img.parentNode.querySelector('.lb-bg-blur');
+  if (!bgBlur) {
+    bgBlur = document.createElement('img');
+    bgBlur.className = 'lb-bg-blur';
+    bgBlur.alt = '';
+    img.parentNode.insertBefore(bgBlur, img);
+  }
+  bgBlur.src = lbImgs[lbCur] || '';
+
   img.style.display = '';
   img.style.opacity = '0';
   img.classList.toggle('lb-nocrop', lbNoCrop);

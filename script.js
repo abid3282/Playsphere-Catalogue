@@ -318,28 +318,7 @@ document.getElementById('scrollHint').addEventListener('click', function() {
 
 
 
-// CURSOR DOT (desktop only)
-(function() {
-  if (IS_TOUCH) return;
-  var cur = document.getElementById('cursor');
-  if (!cur) return;
-  var mx = 0, my = 0;
-  var COLORS = ['#FB637E', '#7D9BC1', '#71CC98', '#F2C75C'];
-  var t = 0, duration = 3000, current = 0;
-  function lerp(a, b, p) {
-    function hex(h) { var n = parseInt(h.slice(1),16); return {r:(n>>16)&255,g:(n>>8)&255,b:n&255}; }
-    var ca = hex(a), cb = hex(b);
-    return 'rgb('+Math.round(ca.r+(cb.r-ca.r)*p)+','+Math.round(ca.g+(cb.g-ca.g)*p)+','+Math.round(ca.b+(cb.b-ca.b)*p)+')';
-  }
-  document.addEventListener('mousemove', function(e) { mx = e.clientX; my = e.clientY; });
-  (function loop() {
-    cur.style.left = mx + 'px'; cur.style.top = my + 'px';
-    t += 16;
-    if (t >= duration) { t = 0; current = (current + 1) % COLORS.length; }
-    cur.style.background = lerp(COLORS[current], COLORS[(current+1)%COLORS.length], t/duration);
-    requestAnimationFrame(loop);
-  })();
-})();
+
 
 // SCROLL PROGRESS
 var pbar = document.getElementById('prog');
@@ -707,29 +686,7 @@ document.documentElement.style.scrollBehavior = 'smooth';
   cover.addEventListener('mouseleave', function() { tagline.style.transform = ''; if (body) body.style.transform = ''; });
 })();
 
-// 5. PROJECT CARD 3D TILT (desktop only)
-(function() {
-  function applyTilt(card) {
-    if (IS_TOUCH) return;
-    var img = card.querySelector('.imm-project-img');
-    card.addEventListener('mousemove', function(e) {
-      var r = card.getBoundingClientRect();
-      var x = (e.clientX - r.left) / r.width  - 0.5;
-      var y = (e.clientY - r.top)  / r.height - 0.5;
-      if (img) { img.style.transform = 'scale(1.08) rotateY(' + (x * 6) + 'deg) rotateX(' + (-y * 5) + 'deg)'; img.style.transition = 'transform .15s linear'; }
-      card.style.boxShadow = '0 ' + (16 + y * -10) + 'px 50px rgba(0,0,0,.28)';
-    });
-    card.addEventListener('mouseleave', function() {
-      if (img) { img.style.transform = ''; img.style.transition = 'transform .7s cubic-bezier(.2,.8,.3,1)'; }
-      card.style.boxShadow = '';
-    });
-  }
-  var cardObs = new MutationObserver(function() {
-    document.querySelectorAll('.imm-project:not([data-tilt])').forEach(function(c) { c.setAttribute('data-tilt', '1'); applyTilt(c); });
-  });
-  cardObs.observe(document.getElementById('projects'), { childList: true, subtree: true });
-  document.querySelectorAll('.imm-project').forEach(function(c) { c.setAttribute('data-tilt', '1'); applyTilt(c); });
-})();
+// 5. PROJECT CARD 3D TILT — removed (zoom-only via CSS)
 
 // 6–15. DEFERRED (non-critical)
 (window.requestIdleCallback || function(cb){ setTimeout(cb, 1); })(function() {

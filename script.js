@@ -766,43 +766,7 @@ document.documentElement.style.scrollBehavior = 'smooth';
     })();
   })();
 
-  // ── M2. SPRING PHYSICS ON PROJECT CARDS ──
-  (function() {
-    if (IS_TOUCH) return;
-    document.querySelectorAll('.imm-project').forEach(function(card) {
-      var vx = 0, vy = 0, rx = 0, ry = 0;
-      var isHovered = false;
-      var targetX = 0, targetY = 0;
-
-      card.addEventListener('mousemove', function(e) {
-        var r = card.getBoundingClientRect();
-        targetX = ((e.clientX - r.left) / r.width  - 0.5) * 14;
-        targetY = ((e.clientY - r.top)  / r.height - 0.5) * 10;
-        isHovered = true;
-      });
-
-      card.addEventListener('mouseleave', function() {
-        isHovered = false;
-        targetX = 0;
-        targetY = 0;
-      });
-
-      (function springLoop() {
-        var stiffness = isHovered ? 0.12 : 0.08;
-        var damping   = isHovered ? 0.75 : 0.65;
-
-        vx = vx * damping + (targetX - rx) * stiffness;
-        vy = vy * damping + (targetY - ry) * stiffness;
-        rx += vx;
-        ry += vy;
-
-        var lift = isHovered ? ' translateY(-4px) scale(1.02)' : '';
-        card.style.transform = 'perspective(800px) rotateY(' + rx + 'deg) rotateX(' + (-ry) + 'deg)' + lift;
-        card.style.borderRadius = '20px'; // keep rounded corners during 3D transform
-        requestAnimationFrame(springLoop);
-      })();
-    });
-  })();
+  // ── M2. SPRING PHYSICS ON PROJECT CARDS — removed (zoom-only via CSS) ──
 
   // ── M3. MAGNETIC PULL — extended to ALL interactive elements ──
   (function() {
@@ -834,40 +798,7 @@ document.documentElement.style.scrollBehavior = 'smooth';
     });
   })();
 
-  // ── M4. IDLE DRIFT — project cards gently float when not interacted with ──
-  (function() {
-    if (IS_TOUCH) return;
-    var cards = document.querySelectorAll('.imm-project');
-    var seeds = [];
-    cards.forEach(function(_, i) {
-      seeds.push({
-        speed:  0.0004 + Math.random() * 0.0004,
-        amp:    3 + Math.random() * 4,
-        offset: Math.random() * Math.PI * 2,
-        active: false
-      });
-    });
-
-    cards.forEach(function(card, i) {
-      card.addEventListener('mouseenter', function() { seeds[i].active = true; });
-      card.addEventListener('mouseleave', function() { seeds[i].active = false; });
-    });
-
-    var t = 0;
-    (function driftLoop() {
-      t += 1;
-      cards.forEach(function(card, i) {
-        if (seeds[i].active) return;
-        var dy = Math.sin(t * seeds[i].speed * 1000 + seeds[i].offset) * seeds[i].amp;
-        // Only apply drift if no spring transform is active
-        var current = card.style.transform || '';
-        if (current.indexOf('rotateY') === -1) {
-          card.style.transform = 'translateY(' + dy + 'px)';
-        }
-      });
-      requestAnimationFrame(driftLoop);
-    })();
-  })();
+  // ── M4. IDLE DRIFT — removed ──
 
   // ── M5. STAGGERED SECTION REVEALS — cascade in with personality ──
   (function() {
